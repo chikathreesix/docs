@@ -11,6 +11,7 @@ description: Nuxt.js lets you define the CSS files/modules/libraries you want to
  - Items: `String` or `Object`
 
 If the item is an object, the properties are:
+
 - src: `String` (path of the file)
 - lang: `String` ([pre-processor used](/faq/pre-processors))
 
