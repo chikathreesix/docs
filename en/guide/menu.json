@@ -9,8 +9,9 @@
           { "to": "#how-it-works", "name": "How it Works" },
           { "to": "#features", "name": "Features" },
           { "to": "#schema", "name": "Schema" },
-          { "to": "#server-rendered", "name": "Server Rendered" },
-          { "to": "#static-generated", "name": "Static Generated" }
+          { "to": "#server-rendered-universal-ssr-", "name": "Server Rendered" },
+          { "to": "#single-page-applications-spa-", "name": "Single Page Application" },
+          { "to": "#static-generated-pre-rendering-", "name": "Static Generated" }
         ]
       },
       { "to": "/contribution-guide", "name": "Contribution Guide" },
@@ -28,7 +29,7 @@
         ]
       },
       {
-        "to": "/directory-structure", "name": "Directory structure",
+        "to": "/directory-structure", "name": "Directory Structure",
         "contents": [
           { "to": "#directories", "name": "Directories" },
           { "to": "#aliases", "name": "Aliases" }
@@ -80,6 +81,15 @@
         ]
       },
       {
+        "to": "/modules", "name": "Modules",
+        "contents": [
+          { "to": "#introduction", "name": "Introduction" },
+          { "to": "#write-a-basic-module", "name": "Write a basic Module" },
+          { "to": "#async-modules", "name": "Async Modules" },
+          { "to": "#common-snippets", "name": "Common Snippets" }
+        ]
+      },
+      {
         "to": "/vuex-store", "name": "Vuex Store",
         "contents": [
           { "to": "#activate-the-store", "name": "Activate the Store" },
@@ -90,7 +100,7 @@
         ]
       },
       {
-        "to": "/commands", "name": "Commands",
+        "to": "/commands", "name": "Commands and Deployment",
         "contents": [
           { "to": "#list-of-commands", "name": "List of Commands" },
           { "to": "#development-environment", "name": "Development Enviroment" },

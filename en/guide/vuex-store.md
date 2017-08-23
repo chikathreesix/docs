@@ -1,6 +1,6 @@
 ---
 title: Vuex Store
-description: Using a store to manage the state is important for every big application, that's why nuxt.js implement Vuex in its core.
+description: Using a store to manage the state is important for every big application, that's why nuxt.js implements Vuex in its core.
 ---
 
 > Using a store to manage the state is important to every big application, that's why nuxt.js implement [vuex](https://github.com/vuejs/vuex) in its core.
@@ -14,28 +14,31 @@ Nuxt.js will look for the `store` directory, if it exists, it will:
 3. Add the `store` option to the root `Vue` instance.
 
 Nuxt.js lets you have **2 modes of store**, choose the one you prefer:
+
 - **Classic:** `store/index.js` returns a store instance
 - **Modules:** every `.js` file inside the `store` directory is transformed as a [namespaced module](http://vuex.vuejs.org/en/modules.html) (`index` being the root module)
 
 ## Classic mode
 
-To activate the store with the classic mode, we create the `store/index.js` file and export the store instance:
+To activate the store with the classic mode, we create the `store/index.js` file which should export a method which returns a Vuex instance:
 
 ```js
 import Vuex from 'vuex'
 
-const store = new Vuex.Store({
-  state: {
-    counter: 0
-  },
-  mutations: {
-    increment (state) {
-      state.counter++
+const createStore = () => {
+  return new Vuex.Store({
+    state: {
+      counter: 0
+    },
+    mutations: {
+      increment (state) {
+        state.counter++
+      }
     }
-  }
-})
+  })
+}
 
-export default store
+export default createStore
 ```
 
 > We don't need to install `vuex` since it's shipped with nuxt.js
@@ -52,12 +55,12 @@ We can now use `this.$store` inside our components:
 
 > Nuxt.js lets you have a `store` directory with every file corresponding to a module.
 
-If you want this option, export the state, mutations and actions in `store/index.js` instead of a store instance:
+If you want this option, export the state as a function, and the mutations and actions as objects in `store/index.js` instead of a store instance:
 
 ```js
-export const state = {
+export const state = () => ({
   counter: 0
-}
+})
 
 export const mutations = {
   increment (state) {
@@ -68,9 +71,9 @@ export const mutations = {
 
 Then, you can have a `store/todos.js` file:
 ```js
-export const state = {
+export const state = () => ({
   list: []
-}
+})
 
 export const mutations = {
   add (state, text) {
@@ -161,6 +164,28 @@ export default {
 ```
 
 <div class="Alert">You can also have modules by exporting a store instance, you will have to add them manually on your store.</div>
+
+### Plugins
+
+You can add additional plugin to the store (in Modules Mode) putting it into the `store/index.js` file:
+
+```js
+import myPlugin from 'myPlugin'
+
+export const plugins = [ myPlugin ]
+
+export const state = () => ({
+  counter: 0
+})
+
+export const mutations = {
+  increment (state) {
+    state.counter++
+  }
+}
+```
+
+More information about the plugins: [Vuex documentation](https://vuex.vuejs.org/en/plugins.html)
 
 ## The fetch Method
 

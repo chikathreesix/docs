@@ -1,9 +1,9 @@
 ---
 title: Plugins
-description: Nuxt.js allows you to define js plugins to be ran before instantiating the root vue.js application, it can be to use your own library or external modules.
+description: Nuxt.js allows you to define JavaScript plugins to be run before instantiating the root vue.js application. This is especially helpful when using your own libraries or external modules.
 ---
 
-> Nuxt.js allows you to define js plugins to be ran before instantiating the root vue.js application, it can be to use your own library or external modules.
+> Nuxt.js allows you to define JavaScript plugins to be run before instantiating the root vue.js application. This is especially helpful when using your own libraries or external modules.
 
 <div class="Alert">It is important to know that in any Vue [instance lifecycle](https://vuejs.org/v2/guide/instance.html#Lifecycle-Diagram), only `beforeCreate` and `created` hooks are called **both from client-side and server-side**. All other hooks are called only from the client-side.</div>
 
@@ -63,8 +63,8 @@ Vue.use(VueNotifications)
 Then, we add the file inside the `plugins` key of `nuxt.config.js`:
 ```js
 module.exports = {
-  plugins: ['~plugins/vue-notifications']
-}
+  plugins: ['~/plugins/vue-notifications']
+}renderer from the server-side
 ```
 
 To learn more about the `plugins` configuration key, check out the [plugins api](/api/configuration-plugins).
@@ -77,27 +77,28 @@ module.exports = {
   build: {
     vendor: ['vue-notifications']
   },
-  plugins: ['~plugins/vue-notifications']
+  plugins: ['~/plugins/vue-notifications']
 }
 ```
 
 ## Inject in $root & context
 
-Some plugins need to be injected in the App root to be used, like [vue-18n](https://github.com/kazupon/vue-i18n). Nuxt.js introduces the `injectAs` property to add a plugin in the root component but also in the context.
+Some plugins need to be injected in the App root to be used, like [vue-18n](https://github.com/kazupon/vue-i18n). Nuxt.js gives you the possibility to export a function in your plugin to receives the root component but also the context.
 
 `plugins/i18n.js`:
 ```js
 import Vue from 'vue'
 import VueI18n from 'vue-i18n'
-import store from '~store'
 
 Vue.use(VueI18n)
 
-const i18n = new VueI18n({
-  /* options... */
-})
-
-export default i18n
+export default ({ app, store }) => {
+  // Set i18n instance on app
+  // This way we can use it in middleware and pages asyncData & fetch
+  app.i18n = new VueI18n({
+    /* vue-i18n options... */
+  })
+}
 ```
 
 `nuxt.config.js`:
@@ -106,10 +107,7 @@ module.exports = {
   build: {
     vendor: ['vue-i18n']
   },
-  plugins: [
-    // Will inject the plugin in the $root app and also in the context as `i18n`
-    { src: '~plugins/i18n.js', injectAs: 'i18n' }
-  ]
+  plugins: ['~/plugins/i18n.js']
 }
 ```
 
@@ -125,7 +123,7 @@ Example:
 ```js
 module.exports = {
   plugins: [
-    { src: '~plugins/vue-notifications', ssr: false }
+    { src: '~/plugins/vue-notifications', ssr: false }
   ]
 }
 ```
@@ -139,3 +137,5 @@ Vue.use(VueNotifications)
 ```
 
 In case you need to require some libraries only for the server, you can use the `process.server` variable set to `true` when webpack is creating the `server.bundle.js` file.
+
+Also, if you need to know if you are inside a generated app (via `nuxt generate`), you can check `process.static`, set to `true` during generation and after. To know the state when a page is being server-rendered by `nuxt generate` before being saved, you can use `process.static && process.server`.

@@ -4,7 +4,9 @@
 
 ## Developing
 
-:warning: You must at least use `node >= 7` to start the server.
+:warning: You must at least use `node >= 8.0.0` (supports async/await) to start the server.
+
+:warning: You must also have the main [nuxtjs.org](https://github.com/nuxt/nuxtjs.org) website repo up and running on localhost to be able to run the docs...
 
 Start a dev server on `localhost:4000`
 
@@ -12,6 +14,8 @@ Start a dev server on `localhost:4000`
 npm install
 npm run dev
 ```
+
+Then access the docs via the website running on `http://nuxt:3000` (see instructions on [nuxtjs.org](https://github.com/nuxt/nuxtjs.org) repo).
 
 ## On Translations
 
@@ -46,6 +50,14 @@ Korean translation is maintained by Taewoong La.
 * Translation Repo — [/DiyLecko/ko.docs.nuxtjs](https://github.com/DiyLecko/ko.docs.nuxtjs)
 * Primary maintainer - [Taewoong La](http://blog.naver.com/diy_lecko)
 * Primary translator - [june](http://jicjjang.github.io), [wanybae](https://github.com/wanybae), [rellario](https://github.com/rellario)
+
+### French
+
+French translation is maintained by Julien Grünhagel/@rspt for [laruche](https://laruche.io).
+
+* Translation Repo — [/larucheio/fr.docs.nuxtjs](https://github.com/larucheio/fr.docs.nuxtjs)
+* Primary maintainer - [laruche](https://laruche.io/)
+* Primary translator - [Julien Grünhagel](https://rspt.io/)
 
 ### Want to help with the translation?
 
